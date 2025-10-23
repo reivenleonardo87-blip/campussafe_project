@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Logging Interface - EduGuard Analytics</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Feduguarda7279back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
+<body class="bg-background min-h-screen">
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay md:hidden" id="mobileNavOverlay"></div>
+    
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav-menu md:hidden" id="mobileNavMenu">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-lg font-bold text-text-primary">Navigation</h2>
+            <button id="closeMobileNav" class="text-text-secondary hover:text-primary">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <nav class="space-y-4">
+            <a href="index.html" class="block px-4 py-3 text-text-primary hover:bg-gray-50 rounded-lg">Home</a>
+            <a href="role_dashboard.html" class="block px-4 py-3 text-text-primary hover:bg-gray-50 rounded-lg">Dashboard</a>
+            <a href="incident_log.html" class="block px-4 py-3 text-primary bg-primary-50 rounded-lg font-medium">Log Incident</a>
+            <a href="analytics.html" class="block px-4 py-3 text-text-primary hover:bg-gray-50 rounded-lg">Analytics</a>
+            <a href="sprofile.html" class="block px-4 py-3 text-text-primary hover:bg-gray-50 rounded-lg">Students</a>
+            <a href="report_gen.html" class="block px-4 py-3 text-text-primary hover:bg-gray-50 rounded-lg">Reports</a>
+            <a href="sys_admin.html" class="block px-4 py-3 text-text-primary hover:bg-gray-50 rounded-lg">Admin</a>
+        </nav>
+        
+        <!-- User Profile in Mobile Menu -->
+        <div class="mt-8 pt-6 border-t border-border-light">
+            <div class="flex items-center space-x-3">
+                <img src="https://images.unsplash.com/photo-1592831383329-23d79a212006" 
+                     alt="Sarah Johnson profile picture" 
+                     class="h-10 w-10 rounded-full object-cover"
+                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                <div>
+                    <p class="font-medium text-text-primary">Sarah Johnson</p>
+                    <p class="text-sm text-text-secondary">Teacher</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation Header -->
+    <nav class="bg-surface border-b border-border-light shadow-subtle sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M14 16l-2-2-1.41 1.41L14 18.83l6-6L18.59 11.41 14 16z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="hidden md:block">
+                        <h1 class="text-xl font-bold text-text-primary">EduGuard Analytics</h1>
+                    </div>
+                </div>
+
+                <!-- Main Navigation -->
+ <div class="hidden md:flex items-center space-x-8">
+                    <a href="login.html" class="nav-link">Home</a>
+                    <a href="role_dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="incident_log.html" class="nav-link active">Log Incident</a>
+                    <a href="analytics.html" class="nav-link ">Analytics</a>
+                    <a href="sprofile.html" class="nav-link">Students</a>
+                    <a href="report_gen.html" class="nav-link">Reports</a>
+                    <a href="sys_admin.html" class="nav-link">Admin</a>
+                </div>
+
+
+                <!-- User Profile -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 text-text-secondary hover:text-primary transition-colors">
+                            <img src="https://images.unsplash.com/photo-1592831383329-23d79a212006" 
+                                 alt="Sarah Johnson profile picture" 
+                                 class="h-8 w-8 rounded-full object-cover"
+                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                            <span class="hidden sm:block font-medium">Sarah Johnson</span>
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="text-text-secondary hover:text-primary">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                    <h2 class="text-3xl font-bold text-text-primary">Log New Incident</h2>
+                    <p class="text-text-secondary mt-1">Document behavioral and academic concerns quickly and efficiently</p>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="flex items-center space-x-3">
+                    <button class="btn-outline text-sm py-2 px-4" id="voiceInputBtn">
+                        <svg class="h-4 w-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                        </svg>
+                        Voice Input
+                    </button>
+                    <button class="btn-primary text-sm py-2 px-4" id="saveDraftBtn">
+                        <svg class="h-4 w-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
+                        </svg>
+                        Save Draft
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Auto-save Indicator -->
+        <div class="mb-6">
+            <div class="alert-info flex items-center space-x-2" id="autoSaveIndicator" style="display: none;">
+                <svg class="h-4 w-4 text-primary animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span class="text-sm">Draft saved automatically at <span id="saveTime"></span></span>
+            </div>
+        </div>
+
+        <!-- Main Form Container -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Main Form - Left Column -->
+            <div class="lg:col-span-2">
+                <form id="incidentForm" class="space-y-6">
+                    <!-- Student Selection Section -->
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-text-primary mb-4">Student Information</h3>
+                        
+                        <!-- Student Search with Autocomplete -->
+                        <div class="space-y-4">
+                            <div>
+                                <label class="form-label">Search Student</label>
+                                <div class="relative">
+                                    <input type="text" 
+                                           class="form-input pr-10" 
+                                           placeholder="Type student name or ID..."
+                                           id="studentSearch"
+                                           autocomplete="off">
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                        <svg class="h-5 w-5 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                        </svg>
+                                    </div>
+                                    
+                                    <!-- Autocomplete Dropdown -->
+                                    <div id="studentDropdown" class="absolute z-10 w-full bg-surface border border-border-light rounded-lg shadow-strong mt-1 max-h-60 overflow-y-auto hidden">
+                                        <div class="p-2 space-y-1">
+                                            <div class="student-option p-3 hover:bg-primary-50 rounded cursor-pointer" data-student-id="STU001">
+                                                <div class="flex items-center space-x-3">
+                                                    <img src="https://images.unsplash.com/photo-1528254541641-f66249f4dac4" 
+                                                         alt="Alex Chen student photo" 
+                                                         class="h-8 w-8 rounded-full object-cover"
+                                                         onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                                    <div>
+                                                        <p class="font-medium text-text-primary">Alex Chen</p>
+                                                        <p class="text-sm text-text-secondary">Grade 10 • ID: STU001</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="student-option p-3 hover:bg-primary-50 rounded cursor-pointer" data-student-id="STU002">
+                                                <div class="flex items-center space-x-3">
+                                                    <img src="https://images.unsplash.com/photo-1672478865061-2241ac9f5faa" 
+                                                         alt="Jordan Williams student photo" 
+                                                         class="h-8 w-8 rounded-full object-cover"
+                                                         onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                                    <div>
+                                                        <p class="font-medium text-text-primary">Jordan Williams</p>
+                                                        <p class="text-sm text-text-secondary">Grade 9 • ID: STU002</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="student-option p-3 hover:bg-primary-50 rounded cursor-pointer" data-student-id="STU003">
+                                                <div class="flex items-center space-x-3">
+                                                    <img src="https://images.unsplash.com/photo-1632215863479-201029d93143" 
+                                                         alt="Maya Patel student photo" 
+                                                         class="h-8 w-8 rounded-full object-cover"
+                                                         onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                                    <div>
+                                                        <p class="font-medium text-text-primary">Maya Patel</p>
+                                                        <p class="text-sm text-text-secondary">Grade 11 • ID: STU003</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Selected Student Display -->
+                            <div id="selectedStudent" class="hidden">
+                                <div class="bg-primary-50 border border-primary-200 rounded-lg p-4">
+                                    <div class="flex items-center space-x-4">
+                                        <img id="selectedStudentPhoto" 
+                                             src="" 
+                                             alt="Selected student photo" 
+                                             class="h-12 w-12 rounded-full object-cover">
+                                        <div class="flex-1">
+                                            <h4 id="selectedStudentName" class="font-semibold text-text-primary"></h4>
+                                            <p id="selectedStudentDetails" class="text-sm text-text-secondary"></p>
+                                        </div>
+                                        <button type="button" class="text-text-secondary hover:text-accent" id="clearStudent">
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Incident Details Section -->
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-text-primary mb-4">Incident Details</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Date and Time -->
+                            <div>
+                                <label class="form-label">Date & Time</label>
+                                <input type="datetime-local" 
+                                       class="form-input" 
+                                       id="incidentDateTime"
+                                       value="2025-10-21T13:00">
+                            </div>
+
+                            <!-- Location -->
+                            <div>
+                                <label class="form-label">Location</label>
+                                <select class="form-input" id="incidentLocation">
+                                    <option value="">Select location...</option>
+                                    <option value="classroom">Classroom</option>
+                                    <option value="hallway">Hallway</option>
+                                    <option value="cafeteria">Cafeteria</option>
+                                    <option value="gymnasium">Gymnasium</option>
+                                    <option value="library">Library</option>
+                                    <option value="playground">Playground</option>
+                                    <option value="bus">School Bus</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Category -->
+                            <div>
+                                <label class="form-label">Category</label>
+                                <select class="form-input" id="incidentCategory">
+                                    <option value="">Select category...</option>
+                                    <option value="behavioral">Behavioral</option>
+                                    <option value="academic">Academic</option>
+                                    <option value="attendance">Attendance</option>
+                                    <option value="safety">Safety</option>
+                                    <option value="positive">Positive Behavior</option>
+                                </select>
+                            </div>
+
+                            <!-- Severity -->
+                            <div>
+                                <label class="form-label">Severity Level</label>
+                                <select class="form-input" id="incidentSeverity">
+                                    <option value="">Select severity...</option>
+                                    <option value="minor">Minor</option>
+                                    <option value="moderate">Moderate</option>
+                                    <option value="major">Major</option>
+                                    <option value="critical">Critical</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mt-6">
+                            <label class="form-label">Incident Description</label>
+                            <textarea class="form-input h-32 resize-none" 
+                                      placeholder="Provide a detailed description of the incident..."
+                                      id="incidentDescription"></textarea>
+                            <div class="flex justify-between items-center mt-2">
+                                <p class="text-sm text-text-secondary">Be specific and objective in your description</p>
+                                <span class="text-sm text-text-secondary" id="charCount">0/500</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information Section -->
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-text-primary mb-4">Additional Information</h3>
+                        
+                        <div class="space-y-6">
+                            <!-- Witnesses -->
+                            <div>
+                                <label class="form-label">Witnesses (if any)</label>
+                                <input type="text" 
+                                       class="form-input" 
+                                       placeholder="Names of any witnesses..."
+                                       id="witnesses">
+                            </div>
+
+                            <!-- Actions Taken -->
+                            <div>
+                                <label class="form-label">Immediate Actions Taken</label>
+                                <textarea class="form-input h-24 resize-none" 
+                                          placeholder="Describe any immediate actions or interventions..."
+                                          id="actionsTaken"></textarea>
+                            </div>
+
+                            <!-- Photo Attachments -->
+                            <div>
+                                <label class="form-label">Photo Documentation</label>
+                                <div class="border-2 border-dashed border-border-light rounded-lg p-6 text-center">
+                                    <input type="file" 
+                                           class="hidden" 
+                                           id="photoUpload" 
+                                           accept="image/*" 
+                                           multiple>
+                                    <label for="photoUpload" class="cursor-pointer">
+                                        <svg class="h-12 w-12 text-text-secondary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                        <p class="text-text-secondary">Click to upload photos or drag and drop</p>
+                                        <p class="text-sm text-text-secondary mt-1">PNG, JPG up to 10MB each</p>
+                                    </label>
+                                </div>
+                                <div id="photoPreview" class="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4 hidden"></div>
+                            </div>
+
+                            <!-- Follow-up Required -->
+                            <div>
+                                <label class="form-label">Follow-up Required</label>
+                                <div class="space-y-3">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox text-primary" id="parentContact">
+                                        <span class="ml-2 text-sm text-text-primary">Parent/Guardian Contact</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox text-primary" id="counselorReview">
+                                        <span class="ml-2 text-sm text-text-primary">Counselor Review</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox text-primary" id="adminReview">
+                                        <span class="ml-2 text-sm text-text-primary">Administrator Review</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="form-checkbox text-primary" id="interventionPlan">
+                                        <span class="ml-2 text-sm text-text-primary">Intervention Plan Development</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-end">
+                        <button type="button" class="btn-outline">
+                            <svg class="h-4 w-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                            Cancel
+                        </button>
+                        <button type="button" class="btn-outline" id="saveDraftBtn2">
+                            <svg class="h-4 w-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
+                            </svg>
+                            Save as Draft
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            <svg class="h-4 w-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Submit Incident Report
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Sidebar - Context & Help -->
+            <div class="space-y-6">
+                <!-- Quick Help -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Quick Help</h3>
+                    <div class="space-y-4">
+                        <div class="p-3 bg-primary-50 rounded-lg">
+                            <h4 class="font-medium text-primary mb-2">💡 Pro Tip</h4>
+                            <p class="text-sm text-text-secondary">Use voice input for faster documentation while maintaining student privacy.</p>
+                        </div>
+                        <div class="p-3 bg-secondary-50 rounded-lg">
+                            <h4 class="font-medium text-secondary mb-2">📱 Mobile Friendly</h4>
+                            <p class="text-sm text-text-secondary">This form works offline and syncs when you're back online.</p>
+                        </div>
+                        <div class="p-3 bg-amber-50 rounded-lg">
+                            <h4 class="font-medium text-amber-600 mb-2">⚡ Auto-Save</h4>
+                            <p class="text-sm text-text-secondary">Your progress is automatically saved every 30 seconds.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Incidents -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Recent Incidents</h3>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1528254541641-f66249f4dac4" 
+                                     alt="Alex Chen student photo" 
+                                     class="h-8 w-8 rounded-full object-cover"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-text-primary">Alex Chen</p>
+                                    <p class="text-xs text-text-secondary">Positive behavior - 2 hours ago</p>
+                                </div>
+                                <span class="status-success text-xs">Positive</span>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://images.unsplash.com/photo-1672478865061-2241ac9f5faa" 
+                                     alt="Jordan Williams student photo" 
+                                     class="h-8 w-8 rounded-full object-cover"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-text-primary">Jordan Williams</p>
+                                    <p class="text-xs text-text-secondary">Late arrival - 4 hours ago</p>
+                                </div>
+                                <span class="status-warning text-xs">Minor</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suggested Categories -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Common Categories</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button class="category-btn p-2 text-sm border border-border-light rounded hover:bg-primary-50 hover:border-primary transition-colors">
+                            Behavioral
+                        </button>
+                        <button class="category-btn p-2 text-sm border border-border-light rounded hover:bg-primary-50 hover:border-primary transition-colors">
+                            Academic
+                        </button>
+                        <button class="category-btn p-2 text-sm border border-border-light rounded hover:bg-primary-50 hover:border-primary transition-colors">
+                            Attendance
+                        </button>
+                        <button class="category-btn p-2 text-sm border border-border-light rounded hover:bg-primary-50 hover:border-primary transition-colors">
+                            Positive
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Need Help?</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-primary-100 p-2 rounded-lg">
+                                <svg class="h-4 w-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Help Center</p>
+                                <p class="text-xs text-text-secondary">View documentation</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-secondary-100 p-2 rounded-lg">
+                                <svg class="h-4 w-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-text-primary">Support Team</p>
+                                <p class="text-xs text-text-secondary">support@eduguard.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript for Form Functionality -->
+    <script>
+        // Student search and autocomplete functionality
+        const studentSearch = document.getElementById('studentSearch');
+        const studentDropdown = document.getElementById('studentDropdown');
+        const selectedStudent = document.getElementById('selectedStudent');
+        
+        studentSearch.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            if (query.length > 0) {
+                studentDropdown.classList.remove('hidden');
+            } else {
+                studentDropdown.classList.add('hidden');
+            }
+        });
+
+        // Student selection
+        document.querySelectorAll('.student-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const studentId = this.dataset.studentId;
+                const studentName = this.querySelector('p').textContent;
+                const studentDetails = this.querySelector('.text-sm').textContent;
+                const studentPhoto = this.querySelector('img').src;
+                
+                // Update selected student display
+                document.getElementById('selectedStudentName').textContent = studentName;
+                document.getElementById('selectedStudentDetails').textContent = studentDetails;
+                document.getElementById('selectedStudentPhoto').src = studentPhoto;
+                document.getElementById('selectedStudentPhoto').alt = studentName + ' profile photo';
+                
+                // Show selected student and hide dropdown
+                selectedStudent.classList.remove('hidden');
+                studentDropdown.classList.add('hidden');
+                studentSearch.value = studentName;
+            });
+        });
+
+        // Clear student selection
+        document.getElementById('clearStudent').addEventListener('click', function() {
+            selectedStudent.classList.add('hidden');
+            studentSearch.value = '';
+        });
+
+        // Character count for description
+        const descriptionField = document.getElementById('incidentDescription');
+        const charCount = document.getElementById('charCount');
+        
+        descriptionField.addEventListener('input', function() {
+            const count = this.value.length;
+            charCount.textContent = count + '/500';
+            
+            if (count > 450) {
+                charCount.classList.add('text-accent');
+            } else {
+                charCount.classList.remove('text-accent');
+            }
+        });
+
+        // Auto-save functionality
+        let autoSaveTimer;
+        const autoSaveIndicator = document.getElementById('autoSaveIndicator');
+        const saveTime = document.getElementById('saveTime');
+        
+        function autoSave() {
+            // Simulate auto-save
+            const now = new Date();
+            saveTime.textContent = now.toLocaleTimeString();
+            autoSaveIndicator.style.display = 'flex';
+            
+            setTimeout(() => {
+                autoSaveIndicator.style.display = 'none';
+            }, 3000);
+        }
+
+        // Auto-save every 30 seconds when form has content
+        function startAutoSave() {
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(() => {
+                if (hasFormContent()) {
+                    autoSave();
+                    startAutoSave();
+                }
+            }, 30000);
+        }
+
+        function hasFormContent() {
+            return studentSearch.value || descriptionField.value || document.getElementById('incidentLocation').value;
+        }
+
+        // Start auto-save when user starts typing
+        [studentSearch, descriptionField, document.getElementById('incidentLocation')].forEach(field => {
+            field.addEventListener('input', startAutoSave);
+        });
+
+        // Voice input simulation
+        document.getElementById('voiceInputBtn').addEventListener('click', function() {
+            alert('Voice input feature would be implemented with Web Speech API');
+        });
+
+        // Save draft functionality
+        document.getElementById('saveDraftBtn').addEventListener('click', function() {
+            autoSave();
+            alert('Draft saved successfully!');
+        });
+
+        document.getElementById('saveDraftBtn2').addEventListener('click', function() {
+            autoSave();
+            alert('Draft saved successfully!');
+        });
+
+        // Category quick select
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.getElementById('incidentCategory').value = this.textContent.toLowerCase();
+            });
+        });
+
+        // Photo upload preview
+        document.getElementById('photoUpload').addEventListener('change', function(e) {
+            const files = e.target.files;
+            const preview = document.getElementById('photoPreview');
+            
+            if (files.length > 0) {
+                preview.classList.remove('hidden');
+                preview.innerHTML = '';
+                
+                Array.from(files).forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const div = document.createElement('div');
+                        div.className = 'relative';
+                        div.innerHTML = `
+                            <img src="${e.target.result}" alt="Incident documentation photo ${index + 1}" class="w-full h-24 object-cover rounded-lg">
+                            <button type="button" class="absolute top-1 right-1 bg-accent text-white rounded-full p-1 hover:bg-accent-700">
+                                <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        `;
+                        preview.appendChild(div);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        });
+
+        // Form submission
+        document.getElementById('incidentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            if (!studentSearch.value) {
+                alert('Please select a student');
+                return;
+            }
+            
+            if (!descriptionField.value.trim()) {
+                alert('Please provide an incident description');
+                return;
+            }
+            
+            // Simulate form submission
+            alert('Incident report submitted successfully!');
+            
+            // Redirect to dashboard
+            window.location.href = 'role_based_dashboard.html';
+        });
+
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!studentSearch.contains(e.target) && !studentDropdown.contains(e.target)) {
+                studentDropdown.classList.add('hidden');
+            }
+        });
+
+        // Set current date/time on load
+        window.addEventListener('load', function() {
+            const now = new Date();
+            const localDateTime = now.toISOString().slice(0, 16);
+            document.getElementById('incidentDateTime').value = localDateTime;
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

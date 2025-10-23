@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CampusSafe</title>
+    <link rel="stylesheet" href="../css\main2.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fcampussafe5019back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-white shadow-campus border-b border-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M14 14h4v8h-4z" fill="white"/>
+                            <circle cx="16" cy="11" r="2" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-semibold text-text-primary">CampusSafe</h1>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="login.html" class="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium">Login</a>
+                        <a href="signup.html" class="border border-primary text-primary px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-50 transition-colors">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <!-- Header Section -->
+            <div class="text-center">
+                <div class="mx-auto h-16 w-16 bg-primary-100 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-shield-alt text-primary text-2xl"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-text-primary mb-2">
+                    Welcome Back
+                </h2>
+                <p class="text-text-secondary">
+                    Sign in to access your CampusSafe dashboard
+                </p>
+            </div>
+
+            <!-- Login Form -->
+            <div class="disclosure-card">
+                <div class="p-8">
+                    <form id="loginForm" class="space-y-6" onsubmit="handleLogin(event)">
+                        <!-- Role Selection -->
+                        <div>
+                            <label for="role" class="block text-sm font-medium text-text-primary mb-2">
+                                Select Your Role
+                            </label>
+                            <div class="relative">
+                                <select id="role" name="role" required 
+                                        class="form-field w-full appearance-none bg-white pr-10">
+                                    <option value="">Choose your role...</option>
+                                    <option value="admin">Admin/Principal</option>
+                                    <option value="teacher">Teacher</option>
+                                    <option value="counselor">Guidance Counselor</option>
+                                    <option value="parent">Parent</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                    <i class="fas fa-chevron-down text-text-secondary"></i>
+                                </div>
+                            </div>
+                            <div id="role-error" class="validation-message error"></div>
+                        </div>
+
+                        <!-- Email Field -->
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-text-primary mb-2">
+                                Email Address
+                            </label>
+                            <div class="relative">
+                                <input id="email" name="email" type="email" required 
+                                       class="form-field w-full pl-10" 
+                                       placeholder="Enter your email address"
+                                       onblur="validateEmail(this)">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-envelope text-text-secondary"></i>
+                                </div>
+                            </div>
+                            <div id="email-error" class="validation-message error"></div>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-text-primary mb-2">
+                                Password
+                            </label>
+                            <div class="relative">
+                                <input id="password" name="password" type="password" required 
+                                       class="form-field w-full pl-10 pr-10" 
+                                       placeholder="Enter your password"
+                                       onblur="validatePassword(this)">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-text-secondary"></i>
+                                </div>
+                                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" 
+                                        onclick="togglePassword('password')">
+                                    <i id="password-toggle" class="fas fa-eye text-text-secondary hover:text-primary transition-colors"></i>
+                                </button>
+                            </div>
+                            <div id="password-error" class="validation-message error"></div>
+                        </div>
+
+                        <!-- Remember Me & Forgot Password -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input id="remember-me" name="remember-me" type="checkbox" 
+                                       class="h-4 w-4 text-primary focus:ring-primary border-border rounded">
+                                <label for="remember-me" class="ml-2 block text-sm text-text-secondary">
+                                    Remember me
+                                </label>
+                            </div>
+                            <div class="text-sm">
+                                <a href="javascript:void(0)" onclick="showForgotPassword()" 
+                                   class="font-medium text-primary hover:text-primary-700 transition-colors">
+                                    Forgot your password?
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div>
+                            <button type="submit" 
+                                    class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors">
+                                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                                    <i class="fas fa-sign-in-alt text-primary-300 group-hover:text-primary-200"></i>
+                                </span>
+                                Sign In
+                            </button>
+                        </div>
+
+                        <!-- Sign Up Link -->
+                        <div class="text-center">
+                            <p class="text-sm text-text-secondary">
+                                Don't have an account?
+                                <a href="user_registration.html" class="font-medium text-primary hover:text-primary-700 transition-colors">
+                                    Sign up here
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-modal max-w-md w-full mx-4">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-text-primary">Reset Password</h3>
+                    <button onclick="closeForgotPassword()" class="text-text-secondary hover:text-text-primary">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <form id="forgotPasswordForm" onsubmit="handleForgotPassword(event)">
+                    <div class="mb-4">
+                        <label for="reset-email" class="block text-sm font-medium text-text-primary mb-2">
+                            Email Address
+                        </label>
+                        <input id="reset-email" name="reset-email" type="email" required 
+                               class="form-field w-full" 
+                               placeholder="Enter your email address">
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button type="button" onclick="closeForgotPassword()" 
+                                class="flex-1 px-4 py-2 border border-border text-text-secondary rounded-md hover:bg-secondary-50 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" 
+                                class="flex-1 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-700 transition-colors">
+                            Send Reset Link
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-secondary-700 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <div class="flex items-center mb-4">
+                        <svg class="h-8 w-8 text-white" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M14 14h4v8h-4z" fill="#2563EB"/>
+                            <circle cx="16" cy="11" r="2" fill="#2563EB"/>
+                        </svg>
+                        <span class="ml-3 text-xl font-semibold">CampusSafe</span>
+                    </div>
+                    <p class="text-secondary-300 mb-4">
+                        Empowering schools through data-driven behavior monitoring and collaborative student support.
+                    </p>
+                </div>
+                
+            </div>
+            
+            <div class="border-t border-secondary-600 mt-8 pt-8 text-center text-secondary-300">
+                <p>&copy; 2025 CampusSafe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Disclosure toggle
+        function toggleDisclosure(section) {
+            const content = document.getElementById(section + '-content');
+            const icon = document.getElementById(section + '-icon');
+            
+            content.classList.toggle('expanded');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Password visibility toggle
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const toggle = document.getElementById(fieldId + '-toggle');
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                toggle.classList.remove('fa-eye');
+                toggle.classList.add('fa-eye-slash');
+            } else {
+                field.type = 'password';
+                toggle.classList.remove('fa-eye-slash');
+                toggle.classList.add('fa-eye');
+            }
+        }
+
+        // Form validation
+        function validateEmail(input) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const errorDiv = document.getElementById('email-error');
+            
+            if (!emailRegex.test(input.value)) {
+                errorDiv.textContent = 'Please enter a valid email address';
+                errorDiv.classList.add('visible');
+                input.classList.add('border-error');
+            } else {
+                errorDiv.classList.remove('visible');
+                input.classList.remove('border-error');
+            }
+        }
+
+        function validatePassword(input) {
+            const errorDiv = document.getElementById('password-error');
+            
+            if (input.value.length < 6) {
+                errorDiv.textContent = 'Password must be at least 6 characters long';
+                errorDiv.classList.add('visible');
+                input.classList.add('border-error');
+            } else {
+                errorDiv.classList.remove('visible');
+                input.classList.remove('border-error');
+            }
+        }
+
+        // Login form submission
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const role = formData.get('role');
+            const email = formData.get('email');
+            const password = formData.get('password');
+            const rememberMe = formData.get('remember-me');
+
+            // Demo credentials validation
+            const demoCredentials = {
+                'admin': { email: 'admin@campussafe.edu', password: 'admin123' },
+                'teacher': { email: 'teacher@campussafe.edu', password: 'teacher123' },
+                'counselor': { email: 'counselor@campussafe.edu', password: 'counselor123' },
+                'parent': { email: 'parent@campussafe.edu', password: 'parent123' }
+            };
+
+            // Validate role selection
+            if (!role) {
+                const roleError = document.getElementById('role-error');
+                roleError.textContent = 'Please select your role';
+                roleError.classList.add('visible');
+                return;
+            }
+
+            // Validate credentials
+            if (demoCredentials[role] && 
+                demoCredentials[role].email === email && 
+                demoCredentials[role].password === password) {
+                
+                // Store session data
+                localStorage.setItem('campusSafeUser', JSON.stringify({
+                    role: role,
+                    email: email,
+                    loginTime: new Date().toISOString(),
+                    rememberMe: rememberMe
+                }));
+
+                // Show success message
+                showSuccessMessage('Login successful! Redirecting to dashboard...');
+
+                // Redirect to appropriate dashboard
+                setTimeout(() => {
+                    if (role === 'admin') {
+                        window.location.href = 'role_dashboard.html';
+                    } else {
+                        // For demo purposes, redirect all other roles to admin dashboard
+                        window.location.href = 'role_dashboard.htmll';
+                    }
+                }, 1500);
+            } else {
+                showErrorMessage('Invalid credentials. Please check your email and password.');
+            }
+        }
+
+        // Forgot password modal
+        function showForgotPassword() {
+            const modal = document.getElementById('forgot-password-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeForgotPassword() {
+            const modal = document.getElementById('forgot-password-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleForgotPassword(event) {
+            event.preventDefault();
+            const email = document.getElementById('reset-email').value;
+            
+            showSuccessMessage('Password reset link sent to ' + email);
+            closeForgotPassword();
+        }
+
+        // Utility functions for messages
+        function showSuccessMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'fixed top-4 right-4 bg-success text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
+            messageDiv.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        function showErrorMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'fixed top-4 right-4 bg-error text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
+            messageDiv.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-circle mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        // Auto-fill demo credentials
+        function fillDemoCredentials(role) {
+            const demoCredentials = {
+                'admin': { email: 'admin@campussafe.edu', password: 'admin123' },
+                'teacher': { email: 'teacher@campussafe.edu', password: 'teacher123' },
+                'counselor': { email: 'counselor@campussafe.edu', password: 'counselor123' },
+                'parent': { email: 'parent@campussafe.edu', password: 'parent123' }
+            };
+
+            if (demoCredentials[role]) {
+                document.getElementById('role').value = role;
+                document.getElementById('email').value = demoCredentials[role].email;
+                document.getElementById('password').value = demoCredentials[role].password;
+            }
+        }
+
+        // Add click handlers for demo credential cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const demoCards = document.querySelectorAll('#demo-credentials-content .bg-secondary-50');
+            demoCards.forEach((card, index) => {
+                const roles = ['admin', 'teacher', 'counselor', 'parent'];
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', () => {
+                    fillDemoCredentials(roles[index]);
+                    toggleDisclosure('demo-credentials');
+                });
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

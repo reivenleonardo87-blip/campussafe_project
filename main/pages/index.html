@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>CampusSafe - Campus Safety Management System</title>
+    <link rel="stylesheet" href="../css/styleindex.css">
+
+ 
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Feduguarda7279back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
+<body>
+    <div class="redirect-container">
+        <div class="logo">🛡️ CampusSafe</div>
+        <div class="subtitle">Campus Safety Management System</div>
+        <div class="loading-spinner"></div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="redirect-message">Redirecting to Role-Based Dashboard...</div>
+    </div>
+
+    <script>
+        // Show loading animation for 3 seconds then redirect
+        setTimeout(function() {
+            window.location.href = '../pages/login.html';
+        }, 3000);
+        
+        // Update redirect message during loading
+        const messages = [
+            'Initializing EduGuard Analytics...',
+            'Loading security protocols...',
+            'Preparing dashboard interface...',
+            'Redirecting to Role-Based Dashboard...'
+        ];
+         
+        let messageIndex = 0;
+        const messageElement = document.querySelector('.redirect-message');
+        
+        const messageInterval = setInterval(function() {
+            if (messageIndex < messages.length - 1) {
+                messageIndex++;
+                messageElement.textContent = messages[messageIndex];
+            } else {
+                clearInterval(messageInterval);
+            }
+        }, 750);
+    </script>
+<script id="dhws-dataInjector" src="/public/dhws-data-injector.js"></script>
+</body>
+</html>

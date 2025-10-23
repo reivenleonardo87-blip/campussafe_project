@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Visualization Hub - EduGuard Analytics</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Feduguarda7279back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
+<body class="bg-background min-h-screen">
+     <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay md:hidden" id="mobileNavOverlay"></div>
+    
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav-menu md:hidden" id="mobileNavMenu">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-lg font-bold text-text-primary">Menu</h2>
+            <button id="closeMobileNav" class="text-text-secondary hover:text-primary">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        
+        <nav class="space-y-4">
+            <a href="index.html" class="block px-4 py-3 text-text-primary hover:bg-gray-50 rounded-lg">Home</a>
+            <a href="role_dashboard.html" class="block px-4 py-3 text-text-primary hover:bg-gray-50 rounded-lg">Dashboard</a>
+            <a href="incident_log.html" class="block px-4 py-3 text-text-primary hover:bg-gray-50 rounded-lg">Log Incident</a>
+            <a href="analytics.html" class="block px-4 py-3 text-primary bg-primary-50 rounded-lg font-medium">Analytics</a>
+            <a href="sprofile.html" class="block px-4 py-3 text-text-primary hover:bg-gray-50 rounded-lg">Students</a>
+            <a href="report_gen.html" class="block px-4 py-3 text-text-primary hover:bg-gray-50 rounded-lg">Reports</a>
+            <a href="sys_admin.html" class="block px-4 py-3 text-text-primary hover:bg-gray-50 rounded-lg">Admin</a>
+        </nav>
+        
+        <!-- User Profile in Mobile Menu -->
+        <div class="mt-8 pt-6 border-t border-border-light">
+            <div class="flex items-center space-x-3">
+                <img src="https://images.unsplash.com/photo-1592831383329-23d79a212006" 
+                     alt="Sarah Johnson profile picture" 
+                     class="h-10 w-10 rounded-full object-cover"
+                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                <div>
+                    <p class="font-medium text-text-primary">Sarah Johnson</p>
+                    <p class="text-sm text-text-secondary">Teacher</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation Header -->
+    <nav class="bg-surface border-b border-border-light shadow-subtle sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M14 16l-2-2-1.41 1.41L14 18.83l6-6L18.59 11.41 14 16z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="hidden md:block">
+                        <h1 class="text-xl font-bold text-text-primary">EduGuard Analytics</h1>
+                    </div>
+                </div>
+
+                <!-- Main Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="login.html" class="nav-link">Home</a>
+                    <a href="role_dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="incident_log.html" class="nav-link">Log Incident</a>
+                    <a href="analytics.html" class="nav-link active">Analytics</a>
+                    <a href="sprofile.html" class="nav-link">Students</a>
+                    <a href="report_gen.html" class="nav-link">Reports</a>
+                    <a href="sys_admin.html" class="nav-link">Admin</a>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 text-text-secondary hover:text-primary transition-colors">
+                            <img src="https://images.unsplash.com/photo-1592831383329-23d79a212006" 
+                                 alt="Sarah Johnson profile picture" 
+                                 class="h-8 w-8 rounded-full object-cover"
+                                 onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                            <span class="hidden sm:block font-medium">Sarah Johnson</span>
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="text-text-secondary hover:text-primary">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                    <h2 class="text-3xl font-bold text-text-primary">Analytics Observatory</h2>
+                    <p class="text-text-secondary mt-1">Interactive data visualization suite with predictive modeling</p>
+                </div>
+                
+                <!-- Export & Refresh Controls -->
+                <div class="flex items-center space-x-3">
+                    <button class="btn-outline text-sm py-2 px-4">
+                        <svg class="h-4 w-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Export Data
+                    </button>
+                    <button class="btn-primary text-sm py-2 px-4" onclick="refreshDashboard()">
+                        <svg class="h-4 w-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        Refresh
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters & Controls -->
+        <div class="mb-8">
+            <div class="bg-surface rounded-lg p-6 border border-border-light shadow-subtle">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                    <div class="flex flex-wrap items-center gap-4">
+                        <div class="flex items-center space-x-2">
+                            <label class="text-sm font-medium text-text-secondary">Time Range:</label>
+                            <select class="form-input py-2 px-3 text-sm min-w-32" id="timeRange">
+                                <option value="7d">Last 7 Days</option>
+                                <option value="30d" selected>Last 30 Days</option>
+                                <option value="90d">Last 90 Days</option>
+                                <option value="1y">Last Year</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2">
+                            <label class="text-sm font-medium text-text-secondary">Grade Level:</label>
+                            <select class="form-input py-2 px-3 text-sm min-w-32" id="gradeFilter">
+                                <option value="all" selected>All Grades</option>
+                                <option value="k-2">K-2</option>
+                                <option value="3-5">3-5</option>
+                                <option value="6-8">6-8</option>
+                                <option value="9-12">9-12</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center space-x-2">
+                            <label class="text-sm font-medium text-text-secondary">Incident Type:</label>
+                            <select class="form-input py-2 px-3 text-sm min-w-32" id="incidentFilter">
+                                <option value="all" selected>All Types</option>
+                                <option value="behavioral">Behavioral</option>
+                                <option value="academic">Academic</option>
+                                <option value="attendance">Attendance</option>
+                                <option value="positive">Positive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <button class="btn-outline text-sm py-2 px-4" onclick="resetFilters()">
+                            <svg class="h-4 w-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                            </svg>
+                            Reset
+                        </button>
+                        <button class="text-primary hover:text-primary-700 text-sm font-medium">
+                            <svg class="h-4 w-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                            </svg>
+                            Advanced Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Metrics Overview -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="data-card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="metric-label">Total Incidents</p>
+                        <p class="metric-value">1,247</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="h-4 w-4 text-secondary mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                            <span class="text-sm text-secondary">-12% from last month</span>
+                        </div>
+                    </div>
+                    <div class="bg-primary-100 p-3 rounded-lg">
+                        <svg class="h-8 w-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="metric-label">Intervention Success</p>
+                        <p class="metric-value">87.3%</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="h-4 w-4 text-secondary mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                            <span class="text-sm text-secondary">+5.2% improvement</span>
+                        </div>
+                    </div>
+                    <div class="bg-secondary-100 p-3 rounded-lg">
+                        <svg class="h-8 w-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="metric-label">Early Warnings</p>
+                        <p class="metric-value">23</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="h-4 w-4 text-accent mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"/>
+                            </svg>
+                            <span class="text-sm text-accent">+3 this week</span>
+                        </div>
+                    </div>
+                    <div class="bg-amber-100 p-3 rounded-lg">
+                        <svg class="h-8 w-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="metric-label">Positive Behaviors</p>
+                        <p class="metric-value">3,892</p>
+                        <div class="flex items-center mt-2">
+                            <svg class="h-4 w-4 text-secondary mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                            <span class="text-sm text-secondary">+18% increase</span>
+                        </div>
+                    </div>
+                    <div class="bg-secondary-100 p-3 rounded-lg">
+                        <svg class="h-8 w-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Analytics Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Column - Primary Charts -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Behavioral Trends Chart -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Behavioral Trends Over Time</h3>
+                        <div class="flex items-center space-x-2">
+                            <button class="text-sm text-text-secondary hover:text-primary" onclick="toggleChartType('trends')">
+                                <svg class="h-4 w-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                </svg>
+                                Export
+                            </button>
+                            <button class="text-sm text-text-secondary hover:text-primary">
+                                <svg class="h-4 w-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                                Drill Down
+                            </button>
+                        </div>
+                    </div>
+                    <div class="h-80">
+                        <canvas id="trendsChart" aria-label="Behavioral trends over time showing incident patterns"></canvas>
+                    </div>
+                    <div class="mt-4 flex items-center justify-center space-x-6 text-sm">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-accent rounded-full mr-2"></div>
+                            <span class="text-text-secondary">Major Incidents</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-amber-500 rounded-full mr-2"></div>
+                            <span class="text-text-secondary">Minor Incidents</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 bg-secondary rounded-full mr-2"></div>
+                            <span class="text-text-secondary">Positive Behaviors</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intervention Success Rates -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Intervention Success Rates</h3>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-text-secondary">Confidence Interval: 95%</span>
+                        </div>
+                    </div>
+                    <div class="h-80">
+                        <canvas id="interventionChart" aria-label="Intervention success rates by type with confidence intervals"></canvas>
+                    </div>
+                    <div class="mt-4 p-4 bg-secondary-50 rounded-lg">
+                        <div class="flex items-center">
+                            <svg class="h-5 w-5 text-secondary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <p class="text-sm text-secondary-800">
+                                <strong>Insight:</strong> Peer mediation shows highest success rate (94.2%) with behavioral interventions, 
+                                while academic support interventions maintain 89.7% effectiveness.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Predictive Analytics -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-text-primary">Predictive Trend Forecasting</h3>
+                        <div class="flex items-center space-x-2">
+                            <span class="status-success text-xs">Model Accuracy: 91.3%</span>
+                        </div>
+                    </div>
+                    <div class="h-80">
+                        <canvas id="predictiveChart" aria-label="Predictive analytics showing forecasted behavioral trends with confidence intervals"></canvas>
+                    </div>
+                    <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="p-3 bg-primary-50 rounded-lg text-center">
+                            <p class="text-sm text-text-secondary">Next 30 Days</p>
+                            <p class="text-lg font-semibold text-primary">↓ 8.3%</p>
+                            <p class="text-xs text-text-secondary">Predicted decrease</p>
+                        </div>
+                        <div class="p-3 bg-amber-50 rounded-lg text-center">
+                            <p class="text-sm text-text-secondary">Risk Students</p>
+                            <p class="text-lg font-semibold text-amber-600">12</p>
+                            <p class="text-xs text-text-secondary">Early intervention needed</p>
+                        </div>
+                        <div class="p-3 bg-secondary-50 rounded-lg text-center">
+                            <p class="text-sm text-text-secondary">Confidence</p>
+                            <p class="text-lg font-semibold text-secondary">91.3%</p>
+                            <p class="text-xs text-text-secondary">Model reliability</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Secondary Analytics -->
+            <div class="space-y-8">
+                <!-- Incident Distribution -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-6">Incident Type Distribution</h3>
+                    <div class="h-64">
+                        <canvas id="distributionChart" aria-label="Pie chart showing distribution of incident types"></canvas>
+                    </div>
+                    <div class="mt-4 space-y-2">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-text-secondary">Behavioral</span>
+                            <span class="font-medium text-text-primary">42.3%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-text-secondary">Academic</span>
+                            <span class="font-medium text-text-primary">28.7%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-text-secondary">Attendance</span>
+                            <span class="font-medium text-text-primary">18.9%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-text-secondary">Other</span>
+                            <span class="font-medium text-text-primary">10.1%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grade Level Analysis -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-6">Grade Level Breakdown</h3>
+                    <div class="h-64">
+                        <canvas id="gradeLevelChart" aria-label="Bar chart showing incidents by grade level"></canvas>
+                    </div>
+                    <div class="mt-4">
+                        <div class="alert-info">
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-primary mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <div>
+                                    <p class="text-sm font-medium">Grade 6-8 Alert</p>
+                                    <p class="text-xs mt-1">Middle school shows 23% higher incident rate. Consider targeted intervention programs.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-time Alerts -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Real-time Alerts</h3>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-secondary rounded-full animate-pulse mr-2"></div>
+                            <span class="text-xs text-text-secondary">Live</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-accent-50 rounded-lg border-l-4 border-accent">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-accent-800">High-Risk Pattern Detected</p>
+                                    <p class="text-xs text-accent-700 mt-1">Student ID: 2847 - 3 incidents in 48 hours</p>
+                                    <p class="text-xs text-text-secondary mt-1">2 minutes ago</p>
+                                </div>
+                                <button class="text-accent hover:text-accent-700">
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-amber-50 rounded-lg border-l-4 border-amber-500">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-amber-800">Attendance Anomaly</p>
+                                    <p class="text-xs text-amber-700 mt-1">Grade 7 - 15% absence spike detected</p>
+                                    <p class="text-xs text-text-secondary mt-1">8 minutes ago</p>
+                                </div>
+                                <button class="text-amber-600 hover:text-amber-700">
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-secondary-50 rounded-lg border-l-4 border-secondary">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <p class="text-sm font-medium text-secondary-800">Positive Trend</p>
+                                    <p class="text-xs text-secondary-700 mt-1">Classroom 204 - 40% improvement this week</p>
+                                    <p class="text-xs text-text-secondary mt-1">15 minutes ago</p>
+                                </div>
+                                <button class="text-secondary hover:text-secondary-700">
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Quick Actions</h3>
+                    <div class="space-y-3">
+                        <button class="w-full btn-primary text-sm py-2">
+                            Generate Weekly Report
+                        </button>
+                        <button class="w-full btn-outline text-sm py-2">
+                            Schedule Data Export
+                        </button>
+                        <button class="w-full btn-outline text-sm py-2">
+                            Configure Alerts
+                        </button>
+                        <a href="student_profile_management.html" class="block w-full btn-outline text-sm py-2 text-center">
+                            View Student Profiles
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Data Insights -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Key Insights</h3>
+                    <div class="space-y-4">
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-start">
+                                <img src="https://images.unsplash.com/photo-1540804989204-81aea62552b2" 
+                                     alt="Data analytics visualization showing behavioral trends" 
+                                     class="h-12 w-12 rounded-lg object-cover mr-3"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Behavioral Patterns</p>
+                                    <p class="text-xs text-text-secondary mt-1">Monday mornings show 34% higher incident rates. Consider targeted morning programs.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-start">
+                                <img src="https://images.unsplash.com/photo-1733877687392-7aa39d980a7f" 
+                                     alt="Success metrics dashboard showing intervention effectiveness" 
+                                     class="h-12 w-12 rounded-lg object-cover mr-3"
+                                     onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;">
+                                <div>
+                                    <p class="text-sm font-medium text-text-primary">Intervention Success</p>
+                                    <p class="text-xs text-text-secondary mt-1">Early intervention within 24 hours increases success rate by 67%.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Tools -->
+        <div class="mt-8">
+            <div class="card">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-text-primary">Period Comparison</h3>
+                    <div class="flex items-center space-x-4">
+                        <select class="form-input py-2 px-3 text-sm" id="comparisonPeriod1">
+                            <option value="current">Current Month</option>
+                            <option value="previous">Previous Month</option>
+                            <option value="quarter">This Quarter</option>
+                            <option value="year">This Year</option>
+                        </select>
+                        <span class="text-text-secondary">vs</span>
+                        <select class="form-input py-2 px-3 text-sm" id="comparisonPeriod2">
+                            <option value="previous" selected>Previous Month</option>
+                            <option value="quarter">Previous Quarter</option>
+                            <option value="year">Previous Year</option>
+                            <option value="baseline">Baseline Period</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="h-80">
+                    <canvas id="comparisonChart" aria-label="Comparison chart showing behavioral metrics across different time periods"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Chart.js Implementation -->
+    <script>
+        // Initialize charts when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCharts();
+            setupRealTimeUpdates();
+        });
+
+        function initializeCharts() {
+            // Behavioral Trends Chart
+            const trendsCtx = document.getElementById('trendsChart').getContext('2d');
+            new Chart(trendsCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                    datasets: [{
+                        label: 'Major Incidents',
+                        data: [12, 19, 8, 15, 10, 7],
+                        borderColor: '#DC2626',
+                        backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                        tension: 0.4
+                    }, {
+                        label: 'Minor Incidents',
+                        data: [25, 32, 18, 28, 22, 15],
+                        borderColor: '#F59E0B',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        tension: 0.4
+                    }, {
+                        label: 'Positive Behaviors',
+                        data: [45, 52, 38, 48, 55, 62],
+                        borderColor: '#059669',
+                        backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Intervention Success Chart
+            const interventionCtx = document.getElementById('interventionChart').getContext('2d');
+            new Chart(interventionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Peer Mediation', 'Counseling', 'Academic Support', 'Behavioral Plan', 'Parent Conference'],
+                    datasets: [{
+                        label: 'Success Rate (%)',
+                        data: [94.2, 87.5, 89.7, 82.3, 91.8],
+                        backgroundColor: [
+                            'rgba(5, 150, 105, 0.8)',
+                            'rgba(37, 99, 235, 0.8)',
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(139, 69, 19, 0.8)',
+                            'rgba(147, 51, 234, 0.8)'
+                        ],
+                        borderColor: [
+                            '#059669',
+                            '#2563EB',
+                            '#F59E0B',
+                            '#8B4513',
+                            '#9333EA'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Predictive Chart
+            const predictiveCtx = document.getElementById('predictiveChart').getContext('2d');
+            new Chart(predictiveCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                    datasets: [{
+                        label: 'Historical Data',
+                        data: [65, 59, 80, 81, 56, 55, 40, null, null, null],
+                        borderColor: '#2563EB',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        tension: 0.4
+                    }, {
+                        label: 'Predicted Trend',
+                        data: [null, null, null, null, null, null, 40, 35, 32, 28],
+                        borderColor: '#059669',
+                        backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                        borderDash: [5, 5],
+                        tension: 0.4
+                    }, {
+                        label: 'Confidence Interval',
+                        data: [null, null, null, null, null, null, 45, 42, 38, 35],
+                        borderColor: 'rgba(5, 150, 105, 0.3)',
+                        backgroundColor: 'rgba(5, 150, 105, 0.05)',
+                        fill: '-1',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Distribution Chart
+            const distributionCtx = document.getElementById('distributionChart').getContext('2d');
+            new Chart(distributionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Behavioral', 'Academic', 'Attendance', 'Other'],
+                    datasets: [{
+                        data: [42.3, 28.7, 18.9, 10.1],
+                        backgroundColor: [
+                            '#DC2626',
+                            '#2563EB',
+                            '#F59E0B',
+                            '#6B7280'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#FFFFFF'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Grade Level Chart
+            const gradeLevelCtx = document.getElementById('gradeLevelChart').getContext('2d');
+            new Chart(gradeLevelCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['K-2', '3-5', '6-8', '9-12'],
+                    datasets: [{
+                        label: 'Incidents',
+                        data: [45, 67, 123, 89],
+                        backgroundColor: [
+                            'rgba(37, 99, 235, 0.8)',
+                            'rgba(5, 150, 105, 0.8)',
+                            'rgba(220, 38, 38, 0.8)',
+                            'rgba(245, 158, 11, 0.8)'
+                        ],
+                        borderColor: [
+                            '#2563EB',
+                            '#059669',
+                            '#DC2626',
+                            '#F59E0B'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Comparison Chart
+            const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
+            new Chart(comparisonCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Major Incidents', 'Minor Incidents', 'Positive Behaviors', 'Interventions', 'Success Rate'],
+                    datasets: [{
+                        label: 'Current Month',
+                        data: [23, 45, 187, 34, 87.3],
+                        backgroundColor: 'rgba(37, 99, 235, 0.8)',
+                        borderColor: '#2563EB',
+                        borderWidth: 2
+                    }, {
+                        label: 'Previous Month',
+                        data: [31, 52, 156, 28, 82.1],
+                        backgroundColor: 'rgba(107, 114, 128, 0.8)',
+                        borderColor: '#6B7280',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function setupRealTimeUpdates() {
+            // Simulate real-time updates every 30 seconds
+            setInterval(function() {
+                console.log('Real-time data update:', new Date().toLocaleTimeString());
+                // In a real application, this would fetch new data from the server
+            }, 30000);
+        }
+
+        function refreshDashboard() {
+            // Simulate dashboard refresh
+            console.log('Refreshing dashboard data...');
+            // Add loading state and refresh charts
+        }
+
+        function resetFilters() {
+            document.getElementById('timeRange').value = '30d';
+            document.getElementById('gradeFilter').value = 'all';
+            document.getElementById('incidentFilter').value = 'all';
+            console.log('Filters reset to default values');
+        }
+
+        function toggleChartType(chartId) {
+            console.log('Toggling chart type for:', chartId);
+            // Implement chart type switching logic
+        }
+
+        // Filter change handlers
+        document.getElementById('timeRange').addEventListener('change', function(e) {
+            console.log('Time range changed to:', e.target.value);
+            // Update charts based on new time range
+        });
+
+        document.getElementById('gradeFilter').addEventListener('change', function(e) {
+            console.log('Grade filter changed to:', e.target.value);
+            // Update charts based on grade filter
+        });
+
+        document.getElementById('incidentFilter').addEventListener('change', function(e) {
+            console.log('Incident filter changed to:', e.target.value);
+            // Update charts based on incident type filter
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
