@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration - CampusSafe</title>
+    <link rel="stylesheet" href="../css/main2.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  
+  <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fcampussafe5019back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.9"></script>
+  <script type="module" src="https://static.rocket.new/rocket-shot.js?v=0.0.1"></script>
+  </head>
+<body class="bg-background min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-white shadow-campus border-b border-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M14 14h4v8h-4z" fill="white"/>
+                            <circle cx="16" cy="11" r="2" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-semibold text-text-primary">CampusSafe</h1>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="login.html" class="border border-primary text-primary px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-50 transition-colors">Login</a>
+                        <a href="signup.html" class="bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-700 transition-colors">Sign Up</a>
+                    </div>
+                </div>
+        </div>
+    </nav>
+
+    
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-2xl mx-auto">
+            <!-- Header Section -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">
+                    Create Your Account
+                </h1>
+                <p class="text-text-secondary text-lg">
+                    Join CampusSafe to start monitoring and supporting student behavior in your educational community.
+                </p>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="disclosure-card">
+                <div class="p-6 md:p-8">
+                    <form id="registrationForm" class="space-y-6">
+                        <!-- Personal Information Section -->
+                        <div class="space-y-4">
+                            <h3 class="text-lg font-semibold text-text-primary border-b border-border pb-2">
+                                Personal Information
+                            </h3>
+                            
+                            <!-- Full Name -->
+                            <div>
+                                <label for="fullName" class="block text-sm font-medium text-text-primary mb-2">
+                                    Full Name <span class="text-error">*</span>
+                                </label>
+                                <input type="text" 
+                                       id="fullName" 
+                                       name="fullName" 
+                                       required
+                                       class="form-field w-full"
+                                       placeholder="Enter your full name">
+                                <div class="validation-message" id="fullName-message"></div>
+                            </div>
+
+                            <!-- Email Address -->
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-text-primary mb-2">
+                                    Email Address <span class="text-error">*</span>
+                                </label>
+                                <input type="email" 
+                                       id="email" 
+                                       name="email" 
+                                       required
+                                       class="form-field w-full"
+                                       placeholder="Enter your email address">
+                                <div class="validation-message" id="email-message"></div>
+                            </div>
+
+                            <!-- Password -->
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-text-primary mb-2">
+                                    Password <span class="text-error">*</span>
+                                </label>
+                                <div class="relative">
+                                    <input type="password" 
+                                           id="password" 
+                                           name="password" 
+                                           required
+                                           class="form-field w-full pr-10"
+                                           placeholder="Create a strong password">
+                                    <button type="button" 
+                                            class="absolute inset-y-0 right-0 pr-3 flex items-center"
+                                            onclick="togglePassword('password')">
+                                        <i class="fas fa-eye text-text-secondary" id="password-toggle"></i>
+                                    </button>
+                                </div>
+                                <div class="mt-2">
+                                    <div class="text-xs text-text-secondary">
+                                        Password must contain:
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 mt-1">
+                                        <span class="text-xs px-2 py-1 bg-secondary-100 rounded" id="length-check">8+ characters</span>
+                                        <span class="text-xs px-2 py-1 bg-secondary-100 rounded" id="uppercase-check">Uppercase</span>
+                                        <span class="text-xs px-2 py-1 bg-secondary-100 rounded" id="lowercase-check">Lowercase</span>
+                                        <span class="text-xs px-2 py-1 bg-secondary-100 rounded" id="number-check">Number</span>
+                                    </div>
+                                </div>
+                                <div class="validation-message" id="password-message"></div>
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div>
+                                <label for="confirmPassword" class="block text-sm font-medium text-text-primary mb-2">
+                                    Confirm Password <span class="text-error">*</span>
+                                </label>
+                                <div class="relative">
+                                    <input type="password" 
+                                           id="confirmPassword" 
+                                           name="confirmPassword" 
+                                           required
+                                           class="form-field w-full pr-10"
+                                           placeholder="Confirm your password">
+                                    <button type="button" 
+                                            class="absolute inset-y-0 right-0 pr-3 flex items-center"
+                                            onclick="togglePassword('confirmPassword')">
+                                        <i class="fas fa-eye text-text-secondary" id="confirmPassword-toggle"></i>
+                                    </button>
+                                </div>
+                                <div class="validation-message" id="confirmPassword-message"></div>
+                            </div>
+                        </div>
+
+                        <!-- Professional Information Section -->
+                        <div class="space-y-4">
+                            <h3 class="text-lg font-semibold text-text-primary border-b border-border pb-2">
+                                Professional Information
+                            </h3>
+
+                            <!-- Role Selection -->
+                            <div>
+                                <label for="role" class="block text-sm font-medium text-text-primary mb-2">
+                                    Role <span class="text-error">*</span>
+                                </label>
+                                <select id="role" 
+                                        name="role" 
+                                        required
+                                        class="form-field w-full"
+                                        onchange="handleRoleChange()">
+                                    <option value="">Select your role</option>
+                                    <option value="admin">Admin/Principal</option>
+                                    <option value="teacher">Teacher</option>
+                                    <option value="counselor">Guidance Counselor</option>
+                                    <option value="parent">Parent</option>
+                                </select>
+                                <div class="validation-message" id="role-message"></div>
+                            </div>
+
+                            <!-- School Search -->
+                            <div>
+                                <label for="school" class="block text-sm font-medium text-text-primary mb-2">
+                                    School Affiliation <span class="text-error">*</span>
+                                </label>
+                                <div class="relative">
+                                    <input type="text" 
+                                           id="school" 
+                                           name="school" 
+                                           required
+                                           class="form-field w-full pr-10"
+                                           placeholder="Search for your school"
+                                           autocomplete="off"
+                                           oninput="searchSchools(this.value)">
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                        <i class="fas fa-search text-text-secondary"></i>
+                                    </div>
+                                </div>
+                                <div id="school-dropdown" class="hidden absolute z-10 w-full bg-white border border-border rounded-md shadow-campus-lg mt-1 max-h-48 overflow-y-auto">
+                                    <!-- School options will be populated here -->
+                                </div>
+                                <div class="mt-2">
+                                    <button type="button" 
+                                            class="text-sm text-primary hover:text-primary-700 transition-colors"
+                                            onclick="showAddSchoolForm()">
+                                        <i class="fas fa-plus mr-1"></i>
+                                        Don't see your school? Add it here
+                                    </button>
+                                </div>
+                                <div class="validation-message" id="school-message"></div>
+                            </div>
+
+                            <!-- Role-specific Fields -->
+                            <div id="role-specific-fields" class="space-y-4">
+                                <!-- Teacher-specific fields -->
+                                <div id="teacher-fields" class="hidden space-y-4">
+                                    <div>
+                                        <label for="gradeLevels" class="block text-sm font-medium text-text-primary mb-2">
+                                            Grade Levels Taught
+                                        </label>
+                                        <div class="grid grid-cols-3 md:grid-cols-6 gap-2">
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="gradeLevels" value="K" class="mr-2">
+                                                <span class="text-sm">K</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="gradeLevels" value="1" class="mr-2">
+                                                <span class="text-sm">1st</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="gradeLevels" value="2" class="mr-2">
+                                                <span class="text-sm">2nd</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="gradeLevels" value="3" class="mr-2">
+                                                <span class="text-sm">3rd</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="gradeLevels" value="4" class="mr-2">
+                                                <span class="text-sm">4th</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="gradeLevels" value="5" class="mr-2">
+                                                <span class="text-sm">5th</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="gradeLevels" value="6" class="mr-2">
+                                                <span class="text-sm">6th</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="gradeLevels" value="7" class="mr-2">
+                                                <span class="text-sm">7th</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="gradeLevels" value="8" class="mr-2">
+                                                <span class="text-sm">8th</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="gradeLevels" value="9" class="mr-2">
+                                                <span class="text-sm">9th</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="gradeLevels" value="10" class="mr-2">
+                                                <span class="text-sm">10th</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="gradeLevels" value="11" class="mr-2">
+                                                <span class="text-sm">11th</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="gradeLevels" value="12" class="mr-2">
+                                                <span class="text-sm">12th</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="subjects" class="block text-sm font-medium text-text-primary mb-2">
+                                            Subjects Taught
+                                        </label>
+                                        <input type="text" 
+                                               id="subjects" 
+                                               name="subjects" 
+                                               class="form-field w-full"
+                                               placeholder="e.g., Mathematics, Science, English">
+                                    </div>
+                                </div>
+
+                                <!-- Parent-specific fields -->
+                                <div id="parent-fields" class="hidden space-y-4">
+                                    <div>
+                                        <label for="studentName" class="block text-sm font-medium text-text-primary mb-2">
+                                            Student Name(s)
+                                        </label>
+                                        <input type="text" 
+                                               id="studentName" 
+                                               name="studentName" 
+                                               class="form-field w-full"
+                                               placeholder="Enter your child's name">
+                                    </div>
+                                    <div>
+                                        <label for="studentGrade" class="block text-sm font-medium text-text-primary mb-2">
+                                            Student Grade Level
+                                        </label>
+                                        <select id="studentGrade" 
+                                                name="studentGrade" 
+                                                class="form-field w-full">
+                                            <option value="">Select grade level</option>
+                                            <option value="K">Kindergarten</option>
+                                            <option value="1">1st Grade</option>
+                                            <option value="2">2nd Grade</option>
+                                            <option value="3">3rd Grade</option>
+                                            <option value="4">4th Grade</option>
+                                            <option value="5">5th Grade</option>
+                                            <option value="6">6th Grade</option>
+                                            <option value="7">7th Grade</option>
+                                            <option value="8">8th Grade</option>
+                                            <option value="9">9th Grade</option>
+                                            <option value="10">10th Grade</option>
+                                            <option value="11">11th Grade</option>
+                                            <option value="12">12th Grade</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Counselor-specific fields -->
+                                <div id="counselor-fields" class="hidden space-y-4">
+                                    <div>
+                                        <label for="specializations" class="block text-sm font-medium text-text-primary mb-2">
+                                            Specializations
+                                        </label>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="specializations" value="academic" class="mr-2">
+                                                <span class="text-sm">Academic Counseling</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="specializations" value="behavioral" class="mr-2">
+                                                <span class="text-sm">Behavioral Support</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="specializations" value="career" class="mr-2">
+                                                <span class="text-sm">Career Guidance</span>
+                                            </label>
+                                            <label class="flex items-center">
+                                                <input type="checkbox" name="specializations" value="crisis" class="mr-2">
+                                                <span class="text-sm">Crisis Intervention</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terms and Privacy -->
+                        <div class="space-y-4">
+                            <h3 class="text-lg font-semibold text-text-primary border-b border-border pb-2">
+                                Terms & Privacy
+                            </h3>
+                            
+                            <div class="space-y-3">
+                                <label class="flex items-start">
+                                    <input type="checkbox" 
+                                           id="termsAccepted" 
+                                           name="termsAccepted" 
+                                           required
+                                           class="mt-1 mr-3">
+                                    <span class="text-sm text-text-secondary">
+                                        I agree to the <a href="javascript:void(0)" class="text-primary hover:text-primary-700 underline">Terms of Service</a> 
+                                        and acknowledge that I have read the <a href="javascript:void(0)" class="text-primary hover:text-primary-700 underline">Privacy Policy</a>
+                                        <span class="text-error">*</span>
+                                    </span>
+                                </label>
+                                
+                                <label class="flex items-start">
+                                    <input type="checkbox" 
+                                           id="dataProcessing" 
+                                           name="dataProcessing" 
+                                           required
+                                           class="mt-1 mr-3">
+                                    <span class="text-sm text-text-secondary">
+                                        I consent to the processing of my personal data in accordance with FERPA and COPPA regulations for educational purposes
+                                        <span class="text-error">*</span>
+                                    </span>
+                                </label>
+                                
+                                <label class="flex items-start">
+                                    <input type="checkbox" 
+                                           id="emailNotifications" 
+                                           name="emailNotifications" 
+                                           class="mt-1 mr-3">
+                                    <span class="text-sm text-text-secondary">
+                                        I would like to receive email notifications about system updates and important announcements
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="pt-4">
+                            <button type="submit" 
+                                    class="w-full bg-primary text-white py-3 px-4 rounded-lg font-semibold hover:bg-primary-700 transition-colors shadow-campus">
+                                <i class="fas fa-user-plus mr-2"></i>
+                                Create Account
+                            </button>
+                        </div>
+
+                        <!-- Login Link -->
+                        <div class="text-center pt-4 border-t border-border">
+                            <p class="text-text-secondary">
+                                Already have an account? 
+                                <a href="login.html" class="text-primary hover:text-primary-700 font-medium transition-colors">
+                                    Sign in here
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add School Modal -->
+    <div id="addSchoolModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-modal max-w-md w-full max-h-screen overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-text-primary">Add New School</h3>
+                    <button type="button" 
+                            class="text-text-secondary hover:text-text-primary"
+                            onclick="hideAddSchoolForm()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <form id="addSchoolForm" class="space-y-4">
+                    <div>
+                        <label for="newSchoolName" class="block text-sm font-medium text-text-primary mb-2">
+                            School Name <span class="text-error">*</span>
+                        </label>
+                        <input type="text" 
+                               id="newSchoolName" 
+                               name="newSchoolName" 
+                               required
+                               class="form-field w-full"
+                               placeholder="Enter school name">
+                    </div>
+                    
+                    <div>
+                        <label for="schoolAddress" class="block text-sm font-medium text-text-primary mb-2">
+                            Address <span class="text-error">*</span>
+                        </label>
+                        <textarea id="schoolAddress" 
+                                  name="schoolAddress" 
+                                  required
+                                  rows="3"
+                                  class="form-field w-full"
+                                  placeholder="Enter school address"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label for="schoolType" class="block text-sm font-medium text-text-primary mb-2">
+                            School Type <span class="text-error">*</span>
+                        </label>
+                        <select id="schoolType" 
+                                name="schoolType" 
+                                required
+                                class="form-field w-full">
+                            <option value="">Select school type</option>
+                            <option value="elementary">Elementary School</option>
+                            <option value="middle">Middle School</option>
+                            <option value="high">High School</option>
+                            <option value="k12">K-12 School</option>
+                            <option value="private">Private School</option>
+                            <option value="charter">Charter School</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex gap-3 pt-4">
+                        <button type="button" 
+                                class="flex-1 border border-border text-text-secondary py-2 px-4 rounded-lg hover:bg-secondary-50 transition-colors"
+                                onclick="hideAddSchoolForm()">
+                            Cancel
+                        </button>
+                        <button type="submit" 
+                                class="flex-1 bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition-colors">
+                            Add School
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Verification Modal -->
+    <div id="verificationModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-modal max-w-md w-full">
+            <div class="p-6 text-center">
+                <div class="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-envelope text-success text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-text-primary mb-2">Verify Your Email</h3>
+                <p class="text-text-secondary mb-6">
+                    We've sent a verification email to <span id="verificationEmail" class="font-medium"></span>. 
+                    Please check your inbox and click the verification link to activate your account.
+                </p>
+                <div class="space-y-3">
+                    <button type="button" 
+                            class="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition-colors"
+                            onclick="resendVerification()">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        Resend Verification Email
+                    </button>
+                    <button type="button" 
+                            class="w-full border border-border text-text-secondary py-2 px-4 rounded-lg hover:bg-secondary-50 transition-colors"
+                            onclick="closeVerificationModal()">
+                        I'll verify later
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-secondary-700 text-white mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <div class="flex items-center mb-4">
+                        <svg class="h-8 w-8 text-white" viewBox="0 0 32 32" fill="currentColor">
+                            <path d="M16 2L3 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-13-5z"/>
+                            <path d="M14 14h4v8h-4z" fill="#2563EB"/>
+                            <circle cx="16" cy="11" r="2" fill="#2563EB"/>
+                        </svg>
+                        <span class="ml-3 text-xl font-semibold">CampusSafe</span>
+                    </div>
+                    <p class="text-secondary-300 mb-4">
+                        Empowering schools through data-driven behavior monitoring and collaborative student support.
+                    </p>
+                </div>
+                
+            </div>
+            
+            <div class="border-t border-secondary-600 mt-8 pt-8 text-center text-secondary-300">
+                <p>&copy; 2025 CampusSafe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mock school data
+        const schools = [
+            'Lincoln Elementary School',
+            'Roosevelt High School',
+            'Washington Middle School',
+            'Jefferson Elementary',
+            'Madison High School',
+            'Monroe Middle School',
+            'Adams Elementary School',
+            'Jackson High School',
+            'Van Buren Middle School',
+            'Harrison Elementary',
+            'Tyler High School',
+            'Polk Middle School',
+            'Taylor Elementary School',
+            'Fillmore High School',
+            'Pierce Middle School'
+        ];
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const toggle = document.getElementById(fieldId + '-toggle');
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                toggle.classList.remove('fa-eye');
+                toggle.classList.add('fa-eye-slash');
+            } else {
+                field.type = 'password';
+                toggle.classList.remove('fa-eye-slash');
+                toggle.classList.add('fa-eye');
+            }
+        }
+
+        function handleRoleChange() {
+            const role = document.getElementById('role').value;
+            const teacherFields = document.getElementById('teacher-fields');
+            const parentFields = document.getElementById('parent-fields');
+            const counselorFields = document.getElementById('counselor-fields');
+            
+            // Hide all role-specific fields
+            teacherFields.classList.add('hidden');
+            parentFields.classList.add('hidden');
+            counselorFields.classList.add('hidden');
+            
+            // Show relevant fields based on role
+            if (role === 'teacher') {
+                teacherFields.classList.remove('hidden');
+            } else if (role === 'parent') {
+                parentFields.classList.remove('hidden');
+            } else if (role === 'counselor') {
+                counselorFields.classList.remove('hidden');
+            }
+        }
+
+        function searchSchools(query) {
+            const dropdown = document.getElementById('school-dropdown');
+            
+            if (query.length < 2) {
+                dropdown.classList.add('hidden');
+                return;
+            }
+            
+            const filteredSchools = schools.filter(school => 
+                school.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            if (filteredSchools.length > 0) {
+                dropdown.innerHTML = filteredSchools.map(school => 
+                    `<div class="px-4 py-2 hover:bg-secondary-50 cursor-pointer" onclick="selectSchool('${school}')">${school}</div>`
+                ).join('');
+                dropdown.classList.remove('hidden');
+            } else {
+                dropdown.classList.add('hidden');
+            }
+        }
+
+        function selectSchool(schoolName) {
+            document.getElementById('school').value = schoolName;
+            document.getElementById('school-dropdown').classList.add('hidden');
+        }
+
+        function showAddSchoolForm() {
+            document.getElementById('addSchoolModal').classList.remove('hidden');
+        }
+
+        function hideAddSchoolForm() {
+            document.getElementById('addSchoolModal').classList.add('hidden');
+            document.getElementById('addSchoolForm').reset();
+        }
+
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const lengthCheck = document.getElementById('length-check');
+            const uppercaseCheck = document.getElementById('uppercase-check');
+            const lowercaseCheck = document.getElementById('lowercase-check');
+            const numberCheck = document.getElementById('number-check');
+            
+            // Length check
+            if (password.length >= 8) {
+                lengthCheck.classList.remove('bg-secondary-100');
+                lengthCheck.classList.add('bg-success-100', 'text-success-800');
+            } else {
+                lengthCheck.classList.remove('bg-success-100', 'text-success-800');
+                lengthCheck.classList.add('bg-secondary-100');
+            }
+            
+            // Uppercase check
+            if (/[A-Z]/.test(password)) {
+                uppercaseCheck.classList.remove('bg-secondary-100');
+                uppercaseCheck.classList.add('bg-success-100', 'text-success-800');
+            } else {
+                uppercaseCheck.classList.remove('bg-success-100', 'text-success-800');
+                uppercaseCheck.classList.add('bg-secondary-100');
+            }
+            
+            // Lowercase check
+            if (/[a-z]/.test(password)) {
+                lowercaseCheck.classList.remove('bg-secondary-100');
+                lowercaseCheck.classList.add('bg-success-100', 'text-success-800');
+            } else {
+                lowercaseCheck.classList.remove('bg-success-100', 'text-success-800');
+                lowercaseCheck.classList.add('bg-secondary-100');
+            }
+            
+            // Number check
+            if (/[0-9]/.test(password)) {
+                numberCheck.classList.remove('bg-secondary-100');
+                numberCheck.classList.add('bg-success-100', 'text-success-800');
+            } else {
+                numberCheck.classList.remove('bg-success-100', 'text-success-800');
+                numberCheck.classList.add('bg-secondary-100');
+            }
+        }
+
+        function showValidationMessage(fieldId, message, isError = true) {
+            const messageElement = document.getElementById(fieldId + '-message');
+            messageElement.textContent = message;
+            messageElement.classList.add('visible');
+            
+            if (isError) {
+                messageElement.classList.remove('success');
+                messageElement.classList.add('error');
+            } else {
+                messageElement.classList.remove('error');
+                messageElement.classList.add('success');
+            }
+        }
+
+        function hideValidationMessage(fieldId) {
+            const messageElement = document.getElementById(fieldId + '-message');
+            messageElement.classList.remove('visible');
+        }
+
+        function resendVerification() {
+            // Simulate resending verification email
+            alert('Verification email has been resent!');
+        }
+
+        function closeVerificationModal() {
+            document.getElementById('verificationModal').classList.add('hidden');
+            // Redirect to login page
+            window.location.href = 'login.html';
+        }
+
+        // Event listeners
+        document.getElementById('password').addEventListener('input', validatePassword);
+
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            
+            if (confirmPassword && password !== confirmPassword) {
+                showValidationMessage('confirmPassword', 'Passwords do not match');
+            } else if (confirmPassword && password === confirmPassword) {
+                showValidationMessage('confirmPassword', 'Passwords match', false);
+            } else {
+                hideValidationMessage('confirmPassword');
+            }
+        });
+
+        document.getElementById('email').addEventListener('blur', function() {
+            const email = this.value;
+            if (email) {
+                // Simulate email uniqueness check
+                setTimeout(() => {
+                    if (email === 'test@example.com') {
+                        showValidationMessage('email', 'This email is already registered');
+                    } else {
+                        showValidationMessage('email', 'Email is available', false);
+                    }
+                }, 500);
+            }
+        });
+
+        // Form submission
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const email = formData.get('email');
+            
+            // Show verification modal
+            document.getElementById('verificationEmail').textContent = email;
+            document.getElementById('verificationModal').classList.remove('hidden');
+        });
+
+        // Add school form submission
+        document.getElementById('addSchoolForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const schoolName = document.getElementById('newSchoolName').value;
+            
+            // Add to schools array (simulate adding to database)
+            schools.push(schoolName);
+            
+            // Select the new school
+            document.getElementById('school').value = schoolName;
+            
+            // Hide modal
+            hideAddSchoolForm();
+            
+            alert('School added successfully!');
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            const schoolDropdown = document.getElementById('school-dropdown');
+            const schoolInput = document.getElementById('school');
+            
+            if (!schoolInput.contains(e.target) && !schoolDropdown.contains(e.target)) {
+                schoolDropdown.classList.add('hidden');
+            }
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
